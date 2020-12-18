@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html, body {
+            position: relative;
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+</body>
+
+<script>
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+    let canvas, context;
+
+    canvas = document.getElementById('canvas');
+    canvas.width = width;
+    canvas.height = height;
+    context = canvas.getContext('2d');
+
+    context.fillStyle = context.strokeStyle = '#c53e00';
+
+    let points = [];
+    let radius = 300;
+    let x, y, theta, i = 0;
+    let length = 2 * Math.PI * radius;
+    let center = [width / 2, height / 2];
+    for (let i = 0; i < length; i++) {
+        theta = Math.PI * 2 / length * i;
+        x = Math.cos(theta) * radius + center[0];
+        y = Math.sin(theta) * radius + center[1];
+        points.push(x, y);
+    }
+
+    let creatTrail = function(points) {
+        return {
+            speed: 5,
+            points: points,
+            draw: function (context) {
+                let points = this.points;
+                i = (i + this.speed * 2) % (points.length);
+
+                context.save();
+                context.beginPath();
+                context.arc(points[i], points[i + 1], 5, 0, 2 * Math.PI);
+                context.fill();
+                context.restore();
+            }
+        }
+    };
+
+    let trail = creatTrail(points);
+
+    animate();
+
+    function animate() {
+        requestAnimationFrame(animate);
+
+        // method a
+        context.save();
+        // 在源图像中显示目标图像，不会显示源图像
+        context.globalCompositeOperation = 'destination-in';
+        context.globalAlpha = 0.9;
+        // 源图像
+        context.fillRect(0, 0, width, height);
+        context.restore();
+
+        // 目标图像
+        trail.draw(context);
+    }
+
+</script>
+</html>

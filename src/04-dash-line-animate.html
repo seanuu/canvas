@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html, body {
+            position: relative;
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+</body>
+
+<script>
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+    let canvas, context;
+
+    canvas = document.getElementById('canvas');
+    canvas.width = width;
+    canvas.height = height;
+    context = canvas.getContext('2d');
+
+    animate();
+
+    function animate() {
+        requestAnimationFrame(animate);
+
+        context.lineDashOffset -= 1;
+        context.clearRect(0, 0, width, height);
+        context.beginPath();
+        context.setLineDash([5, 2, 5]);
+        context.moveTo(0, 0);
+        context.lineTo(width, height);
+        context.stroke();
+    }
+
+</script>
+</html>

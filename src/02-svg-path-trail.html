@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html, body {
+            position: relative;
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        .icon {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+<svg class="icon" id="svg" width="1024px" height="1024px" viewBox="0 0 1024 1024" version="1.1"
+     xmlns="http://www.w3.org/2000/svg">
+    <path fill="#000000"
+          d="M108 895.2c-8 0-15.2-6.4-16-15.2-9.6-153.6 0.8-230.4 34.4-266.4 27.2-28 64-28 107.2-27.2 60 0.8 134.4 1.6 222.4-72 80.8-68 66.4-121.6 45.6-204-13.6-53.6-29.6-114.4-21.6-192 0.8-8.8 8.8-15.2 17.6-14.4 8.8 0.8 15.2 8.8 14.4 17.6-7.2 72 7.2 129.6 20.8 180.8 21.6 83.2 40 156-56 236-96.8 80.8-181.6 80-243.2 80-38.4 0-66.4-0.8-83.2 17.6-26.4 28-34.4 102.4-25.6 242.4 0.8 8.8-6.4 16-15.2 16.8h-1.6z"/>
+    <path fill="#000000"
+          d="M209.6 903.2c-7.2 0-13.6-4.8-15.2-12.8-17.6-78.4-13.6-124.8 13.6-147.2 39.2-32.8 109.6-4 199.2 33.6 102.4 42.4 228.8 95.2 316 47.2 98.4-54.4 174.4-160 193.6-268.8 15.2-84-5.6-163.2-56.8-222.4-24.8-28.8-67.2-30.4-111.2-32.8-47.2-2.4-96-4.8-127.2-40-24-28-33.6-71.2-28-133.6 0.8-8.8 8.8-15.2 17.6-14.4 8.8 0.8 15.2 8.8 14.4 17.6-4.8 52.8 2.4 88.8 20 109.6 22.4 25.6 62.4 27.2 104.8 29.6 49.6 2.4 100 4.8 134.4 43.2 58.4 66.4 80.8 155.2 64.8 249.6-20.8 120-101.6 231.2-209.6 291.2-100 55.2-235.2-0.8-344-45.6-74.4-31.2-143.2-59.2-167.2-39.2-11.2 9.6-20.8 36.8-3.2 116 1.6 8.8-3.2 16.8-12 19.2h-4z"/>
+    <path fill="#000000"
+          d="M600 743.2c-8 0-14.4-5.6-16-13.6-1.6-8.8 4.8-16.8 13.6-18.4 65.6-9.6 161.6-64 164.8-136.8 0-8.8 8-15.2 16.8-15.2s16 8 15.2 16.8c-4 91.2-113.6 155.2-192 167.2H600z"/>
+</svg>
+
+<canvas id="canvas"></canvas>
+</body>
+
+<script>
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+    let canvas, context;
+    let points = [], paths, point;
+    let i = 0;
+
+    canvas = document.getElementById('canvas');
+    canvas.width = width;
+    canvas.height = height;
+    context = canvas.getContext('2d');
+    context.fillStyle = context.strokeStyle = '#c53e00';
+
+    paths = document.getElementById('svg').children;
+
+    for (let path of paths) {
+        let length = path.getTotalLength();
+        for (let i = 0; i < length; i++) {
+            point = path.getPointAtLength(i);
+            points.push(point);
+        }
+    }
+
+    let creatTrail = function(points) {
+        return {
+            speed: 5,
+            points: points,
+            draw: function (context) {
+                let points = this.points;
+                i = (i + this.speed) % (points.length);
+
+                context.save();
+                context.beginPath();
+                context.arc(points[i].x, points[i].y, 10, 0, 2 * Math.PI);
+                context.fill();
+                context.restore();
+            }
+        }
+    };
+
+    let trail = creatTrail(points);
+
+    animate();
+
+    function animate() {
+        requestAnimationFrame(animate);
+
+        context.save();
+        context.globalCompositeOperation = 'destination-in';
+        context.globalAlpha = 0.9;
+        context.fillRect(0, 0, width, height);
+        context.restore();
+
+        trail.draw(context);
+    }
+
+</script>
+</html>

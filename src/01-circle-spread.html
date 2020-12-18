@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html, body {
+            position: relative;
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+</body>
+
+<script>
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+    let canvas, context;
+
+    canvas = document.getElementById('canvas');
+    canvas.width = width;
+    canvas.height = height;
+    context = canvas.getContext('2d');
+
+    let circle = function (x, y) {
+        return {
+            radius: 0,
+            x: x,
+            y: y,
+            innerRadius: 5,
+            step: 5,
+            rippleNumber: 5,
+            color: '#c53e00',
+            draw: function (ctx, full) {
+                let radiusWidth = this.innerRadius + this.step * this.rippleNumber;
+                let step = this.step;
+                let radius, opacity;
+
+                ctx.save();
+                ctx.strokeStyle = this.color;
+
+                for (let i = 0; i < this.rippleNumber; i++) {
+                    radius = (this.radius + i * step) % (radiusWidth - this.innerRadius) + this.innerRadius;
+                    opacity = 1 - this.circleInOut(radius / radiusWidth);
+                    ctx.globalAlpha = opacity;
+                    ctx.beginPath();
+                    ctx.lineWidth = full ? step + 1 : 1;
+                    ctx.arc(this.x, this.y, radius, 0, 2 * Math.PI);
+                    ctx.stroke();
+                }
+                ctx.restore();
+
+                ctx.save();
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.innerRadius + step / 2, 0, 2 * Math.PI);
+                ctx.fill();
+                ctx.restore();
+
+                this.radius += step / 100;
+
+            },
+            circleInOut: function(t) {
+                return ((t *= 2) <= 1 ? 1 - Math.sqrt(1 - t * t) : Math.sqrt(1 - (t -= 2) * t) + 1) / 2;
+            }
+        }
+    };
+
+    let circles = [];
+    let c;
+
+    for (let i = 0; i < 8; i += 2) {
+        c = circle(100, i * 50 + 50);
+        c.innerRadius = i * 2;
+        circles.push(c);
+
+        c = circle(200, i * 50 + 50);
+        c.innerRadius = i * 2;
+        circles.push(c);
+    }
+
+    animate();
+
+    function animate() {
+        requestAnimationFrame(animate);
+        context.clearRect(0, 0, width, height);
+
+        circles.forEach((item, i) => {
+            item.draw(context, i % 2);
+        })
+    }
+</script>
+</html>

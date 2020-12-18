@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="18a9b27e-2536-4a30-8388-76af43a98c07" name="Default Changelist" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>innerRadius</find>
+      <find>globalCompositeOperation</find>
+      <find>clear</find>
+    </findStrings>
+  </component>
+  <component name="ProjectId" id="1TBoQTs0nVoKuP8bcUAYOOq7Iw3" />
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="G:\canvas\src" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="G:\canvas\src" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="18a9b27e-2536-4a30-8388-76af43a98c07" name="Default Changelist" comment="" />
+      <created>1561775887435</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1561775887435</updated>
+      <workItem from="1561775888490" duration="15643000" />
+      <workItem from="1562035299856" duration="726000" />
+      <workItem from="1563256183055" duration="2505000" />
+      <workItem from="1563788499988" duration="2165000" />
+      <workItem from="1564457748151" duration="3816000" />
+      <workItem from="1565339467147" duration="1741000" />
+      <workItem from="1572942834337" duration="515000" />
+      <workItem from="1573108048844" duration="1710000" />
+      <workItem from="1585705116859" duration="5295000" />
+      <workItem from="1587526048606" duration="1518000" />
+      <workItem from="1606373419303" duration="533000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+</project>
